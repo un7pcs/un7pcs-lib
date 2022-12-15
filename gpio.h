@@ -79,12 +79,12 @@ template <class PORT, size_t BIT> class GpioPin
 
     static void set()
     {
-        PORT::set_bits(BIT_MASK);
+        PORT::set(BIT_MASK);
     }
 
     static void reset()
     {
-        PORT::reset_bits(BIT_MASK);
+        PORT::reset(BIT_MASK);
     }
 
     static void write(const bool bit_value)
@@ -93,6 +93,11 @@ template <class PORT, size_t BIT> class GpioPin
             set();
         else
             reset();
+    }
+
+    static bool read()
+    {
+        return (PORT::read() & BIT_MASK) != 0;
     }
 
     static void set_mode(const GpioMode mode, const GpioSpeed speed = GpioSpeed::HIGH, bool init_output_state = false)
