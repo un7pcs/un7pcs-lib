@@ -8,7 +8,7 @@ void Delay_us(uint32_t time)
 {
     int32_t old_value = SysTick->VAL;
     // const uint32_t stop_value = SysTick->VAL + time * freq_MZ - 30;
-	const int32_t stop = time * freq_MZ - 80;
+	const int32_t stop = (time * SystemCoreClock / 1000000U) - 80;
     int32_t cnt = 0;
     while (cnt < stop)
     {
